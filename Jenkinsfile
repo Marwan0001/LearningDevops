@@ -2,7 +2,7 @@ pipeline{
     agent{
         label 'docker'
     }
-}
+
 
 stages{
     stage("building docker image"){
@@ -15,9 +15,10 @@ stages{
     stage("running docker image"){
         steps{
             script{
-                env.DOCKER_BUILD_KIT=1
+                env.DOCKER_BUILDKIT=1
                 sh "docker run -e CI=true marwanmw/reactdev npm run test"
             }
         }
     }
+}
 }
